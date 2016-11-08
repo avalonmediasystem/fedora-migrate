@@ -10,6 +10,7 @@ Dir[File.expand_path(File.join(File.dirname(__FILE__), "tasks/*.rake"))].each { 
 module FedoraMigrate
   extend ActiveSupport::Autoload
 
+  autoload :ClassOrderedRepositoryMigrator
   autoload :ContentMover
   autoload :DatastreamMover
   autoload :DatastreamVerification
@@ -50,7 +51,8 @@ module FedoraMigrate
     end
 
     def migrate_repository(args)
-      migrator = FedoraMigrate::RepositoryMigrator.new(args[:namespace], args[:options])
+      migrator = FedoraMigrate::ClassOrderedRepositoryMigrator.new(args[:namespace], args[:options]) if args[:options].keys.include? :class_order
+      migrator ||= FedoraMigrate::RepositoryMigrator.new(args[:namespace], args[:options])
       migrator.migrate_objects
       migrator.migrate_relationships
       migrator
