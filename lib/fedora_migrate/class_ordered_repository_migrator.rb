@@ -6,9 +6,6 @@ module FedoraMigrate
         source_objects(klass).each do |object|
           @source = object
           migrate_current_object
-          if single_pass?
-            migrate_relationship unless blacklist.include?(source.pid)
-          end
         end
       end
       report.reload

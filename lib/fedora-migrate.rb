@@ -54,7 +54,7 @@ module FedoraMigrate
       migrator = FedoraMigrate::ClassOrderedRepositoryMigrator.new(args[:namespace], args[:options]) if args[:options].keys.include? :class_order
       migrator ||= FedoraMigrate::RepositoryMigrator.new(args[:namespace], args[:options])
       migrator.migrate_objects
-      migrator.migrate_relationships
+      migrator.migrate_relationships unless !!migrator.options[:single_pass]
       migrator
     end
   end
