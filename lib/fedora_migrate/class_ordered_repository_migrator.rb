@@ -35,7 +35,7 @@ module FedoraMigrate
 
       def qualifying_object(object, klass)
         name = object.pid.split(/:/).first
-        return object if (name.match(namespace) && object.is_a?(klass))
+        return object if (name.match(namespace) && object.models.include?("info:fedora/afmodel:#{klass.name.gsub(/(::)/, '_')}"))
       end
   end
 end
