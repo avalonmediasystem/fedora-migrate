@@ -3,6 +3,7 @@ module FedoraMigrate
 
     def migrate_objects
       class_order.each do |klass|
+        @source_objects = nil
         source_objects(klass).each do |object|
           @source = object
           migrate_current_object
