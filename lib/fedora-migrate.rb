@@ -4,9 +4,6 @@ require "active_fedora"
 require "hydra/head"
 require "rubydora"
 
-# Loads rake tasks
-Dir[File.expand_path(File.join(File.dirname(__FILE__), "tasks/*.rake"))].each { |ext| load ext } if defined?(Rake)
-
 module FedoraMigrate
   extend ActiveSupport::Autoload
 
